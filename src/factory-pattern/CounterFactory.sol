@@ -16,10 +16,11 @@ contract CounterFactory {
         _;
     }
 
-    function createCounter(uint256 number) public {
+    function createCounter(uint256 number) public onlyOwner returns(address) {
         Counter counter = new Counter();
         counter.setNumber(number);
 
         emit CounterDeployed(address(counter));
+        return address(counter);
     }
 }

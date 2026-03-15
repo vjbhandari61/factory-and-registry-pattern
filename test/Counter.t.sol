@@ -2,7 +2,7 @@
 pragma solidity ^0.8.13;
 
 import {Test} from "forge-std/Test.sol";
-import {Counter} from "../src/Counter.sol";
+import {Counter} from "../src/factory-pattern/Counter.sol";
 
 contract CounterTest is Test {
     Counter public counter;
@@ -20,5 +20,12 @@ contract CounterTest is Test {
     function testFuzz_SetNumber(uint256 x) public {
         counter.setNumber(x);
         assertEq(counter.number(), x);
+    }
+
+    function testFuzz_IncrementNumber(uint256 x) public {
+        counter.setNumber(x);
+        counter.increment();
+
+        assertEq(counter.number(), x + 1);
     }
 }
